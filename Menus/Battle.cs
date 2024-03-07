@@ -1,23 +1,22 @@
-﻿using System.ComponentModel;
+﻿using GrpcPokemon.Menus.Display;
+using System.ComponentModel;
 
 namespace GrpcPokemon
 {
-  public static class Battle
+  public class Battle
   {
-    public static int playerTurn = 0;
+    public BattleUi UI = new BattleUi(new Bulbasaur());
+    public int playerTurn = 0;
 
-    public static Action StartBattle()
+    public Action StartBattle()
     {
       return () => { };
     }
 
-    public static void HandleAction(Action playerAction)
+    public void HandleAction(Action playerAction)
     {
       throw new NotImplementedException();
     }
-
-
-    public static 
 
   }
 }

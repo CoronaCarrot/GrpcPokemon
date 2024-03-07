@@ -3,6 +3,8 @@
   public class Charmander : IPokemon
   {
     public string ASCIIArt { get; set; } = CharmanderArt.Draw();
+    public string FightSpriteF { get; set; } = "" ;
+    public string FightSpriteB { get; set; } = "";
     public string Name { get; set; } = "Charmander";
     public PokemonInfo.Type Type { get; set; } = PokemonInfo.Type.Fire;
     public int Level { get; set; } = 1;

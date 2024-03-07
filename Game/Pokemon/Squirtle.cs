@@ -3,6 +3,8 @@
   public class Squirtle : IPokemon
   {
     public string ASCIIArt { get; set; } = SquirtleArt.Draw();
+    public string FightSpriteF { get; set; } = "";
+    public string FightSpriteB { get; set; } = "";
     public string Name { get; set; } = "Squirtle";
     public PokemonInfo.Type Type { get; set; } = PokemonInfo.Type.Water;
     public int Level { get; set; } = 1;

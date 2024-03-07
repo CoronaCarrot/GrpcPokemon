@@ -36,7 +36,7 @@
               new MenuItems("View Pokemon", ViewPokemon.View()),
               new MenuItems("View Pokedex", ViewPokedex.View()),
               new MenuItems("Explore", Explore.ExploreWorld()),
-              new MenuItems("Battle", Battle.StartBattle()),
+              new MenuItems("Battle", new Battle().StartBattle()),
             };
     }
   }

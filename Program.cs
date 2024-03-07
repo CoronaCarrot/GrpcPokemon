@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using GrpcPokemon.Menus.Display;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ParkAir___Assignment;
 using System.Net;
+using System.Text;
 
 namespace GrpcPokemon
 {
@@ -16,6 +19,18 @@ namespace GrpcPokemon
     /// <param name="args">Arguments passed by CLI</param>
     static void Main(string[] args)
     {
+      Console.OutputEncoding = Encoding.UTF8;
+      AnsiConsole.Initialize();
+
+      Bulbasaur bulb = new Bulbasaur();
+      BattleUi testBattle = new BattleUi(bulb);
+      while (true)
+      {
+        Console.Clear();
+        testBattle.BattleSelect();
+
+      }
+
       try
       {
         Console.ResetColor();
