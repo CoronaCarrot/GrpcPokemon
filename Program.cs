@@ -24,11 +24,11 @@ namespace GrpcPokemon
 
       Bulbasaur bulb = new Bulbasaur();
       BattleUi testBattle = new BattleUi(bulb);
-      //while (true)
-      //{
-      //  testBattle.BattleSelect();
-      //
-      //}
+      while (true)
+      {
+        testBattle.BattleSelect();
+      
+      }
 
       try
       {

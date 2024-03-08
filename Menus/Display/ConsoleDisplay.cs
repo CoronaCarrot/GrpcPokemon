@@ -230,6 +230,7 @@
                 }
                 WriteTextInCentre(optionalText.SecondaryText);
                 Console.ResetColor();
+                Console.SetCursorPosition(0, Console.CursorTop);
             }
         }
 

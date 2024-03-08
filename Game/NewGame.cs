@@ -48,8 +48,9 @@
             CurrentUser user = new CurrentUser();
 
             // Get the new players name
-            ConsoleDisplay.WriteTextInCentre("Trainer, what is your name?");
+            Console.Write("Trainer, what is your name?\n>>> ");
             user.UserName = Console.ReadLine();
+            Console.Clear();
 
             // Let the player chose their first pokemon
             ChosePokemon(PokemonChoices(), ref user);
@@ -65,7 +66,7 @@
         public static void ChosePokemon(List<MenuItems> toDisplay, ref CurrentUser user)
         {
             int index = 0;
-            ConsoleDisplay.DisplayGenericMenu(toDisplay, ref index, new OptionalText { PrimiaryText = "Choose your starter Pokemon" });
+            ConsoleDisplay.DisplayGenericMenu(toDisplay, ref index, new OptionalText { PrimiaryText = $"{user.UserName}, Choose your starter Pokemon\n" });
 
             IPokemon chosenPokemon = toDisplay[index].Chosen;
 
