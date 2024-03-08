@@ -26,7 +26,6 @@ namespace GrpcPokemon
       BattleUi testBattle = new BattleUi(bulb);
       while (true)
       {
-        Console.Clear();
         testBattle.BattleSelect();
 
       }

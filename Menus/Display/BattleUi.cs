@@ -1,37 +1,46 @@
-﻿using GrpcPokemon.Menus.Display;
-using System;
-using System.Collections.Generic;
-using System.Formats.Asn1;
-using System.Linq;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Security.Cryptography;
 
 namespace GrpcPokemon.Menus.Display
 {
-  public class BattleUi
-  {
-    public IPokemon player1;
-
-    public BattleUi(IPokemon player1)
+    public class BattleUi
     {
-      this.player1 = player1;
-    }
+        public IPokemon player1;
+        public IPokemon player2 = new Bulbasaur();
 
-    public ConsoleKeyInfo BattleSelect()
-    {
-      int numLinesP1 = player1.FightSpriteB.Split('\n').Length;
+        public BattleUi(IPokemon player1)
+        {
+            this.player1 = player1;
+        }
 
-      Console.WriteLine($@"╭──────────────────────────────╮
-│ NAME       ╭───────────────╮ │
-│ LV 25      │HP             │ │
-│            ╰───────────────╯ │
+        public static void DrawPokemon(int left, int top, string[] sprite)
+        {
+            for (int i = 0 ; i < sprite.Length; i++)
+            {
+                Console.SetCursorPosition(left, top + i);
+                Console.Write(sprite[i]);
+            }
+        }
+        public static string BuildHP(int health)
+        {
+            return $"{new string('█', health / 10)}{(health % 10 != 0 ? (health % 10 <= 3 ? '░' : (health % 10 > 3 && health % 10 <= 6 ? '▒' : '▓')) : "")}".PadRight(10);
+        }
+
+        public ConsoleKeyInfo BattleSelect()
+        {
+            Console.SetCursorPosition(0, 0);
+            string[] P1 = player1.FightSpriteB.Split('\n');
+            string[] P2 = player2.FightSpriteF.Split('\n');
+
+            Console.WriteLine($@"╭──────────────────────────────╮
+│ {(player2.Name.Length <= 11 ? player2.Name.PadRight(11) : $"{player2.Name.Substring(0, 5)}...")} ╭──────────────╮ │
+│ LV {player2.Level.ToString().PadRight(8)} │HP {BuildHP(player2.Health)} │ ╰╮
+│             ╰──────────────╯ ╭┘
 ╰──────────────────────────────╯");
-      Console.Write( new String('\n', numLinesP1-5));
-      Console.WriteLine($@"{ new String(' ', Console.BufferWidth - 33)} ╭──────────────────────────────╮
-{new String(' ', Console.BufferWidth - 33)} │             ╭──────────────╮ │
-{new String(' ', Console.BufferWidth - 33)} │ LV 25       │HP ########## │ │
-{new String(' ', Console.BufferWidth - 33)}╭╯             ╰───╮ 100/100  │ │
+            Console.Write(new String('\n', (P1.Length > P2.Length ? P1.Length : P2.Length) - 5));
+            Console.WriteLine($@"{new String(' ', Console.BufferWidth - 33)} ╭──────────────────────────────╮
+{new String(' ', Console.BufferWidth - 33)} │ {(player1.Name.Length <= 11 ? player1.Name.PadRight(11) : $"{player1.Name.Substring(0, 7)}...")} ╭──────────────╮ │
+{new String(' ', Console.BufferWidth - 33)} │ LV {player1.Level.ToString().PadRight(8)} │HP {BuildHP(player1.Health)} │ │
+{new String(' ', Console.BufferWidth - 33)}╭╯             ╰───╮ {player1.Health.ToString().PadLeft(3)}/100  │ │
 {new String(' ', Console.BufferWidth - 33)}└╮                 ╰──────────╯ │
 ╭{new String('─', Console.BufferWidth - 33)}┴──────────────────────────────┤
 │ ╭{new String('─', Console.BufferWidth - 38)}╮  ╭─────────────╮ ╭────────────╮ │
@@ -43,14 +52,13 @@ namespace GrpcPokemon.Menus.Display
 ╰{new String('─', Console.BufferWidth - 2)}╯
 (?) Press a key to choose!
       ");
-      Console.SetCursorPosition(1, 5);
-      Console.Write($"{player1.FightSpriteB}");
-      Console.SetCursorPosition(Console.BufferWidth - player1.FightSpriteB.Split('\n').First().Count(), 0);
-      Console.Write($"{player1.FightSpriteB}");
+            DrawPokemon(2, 5 + (P1.Length > P2.Length ? P1.Length - P2.Length : P2.Length - P1.Length), P1);
+            DrawPokemon(Console.BufferWidth - 3 - P1[1].Length, 0, P2);
 
-      ConsoleKeyInfo pressedKey = Console.ReadKey(true);
-      Console.Write(pressedKey.ToString());
-      return pressedKey;
+            ConsoleKeyInfo pressedKey = Console.ReadKey(true);
+            player1.Health -= new Random().Next(0, 3);
+            player2.Health -= new Random().Next(0, 3);
+            return pressedKey;
+        }
     }
-  }
 }
