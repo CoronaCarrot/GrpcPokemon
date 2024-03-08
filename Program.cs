@@ -24,16 +24,15 @@ namespace GrpcPokemon
 
       Bulbasaur bulb = new Bulbasaur();
       BattleUi testBattle = new BattleUi(bulb);
-      while (true)
-      {
-        testBattle.BattleSelect();
-
-      }
+      //while (true)
+      //{
+      //  testBattle.BattleSelect();
+      //
+      //}
 
       try
       {
         Console.ResetColor();
-        SetConsoleSize();
         PokemonManager manager = new PokemonManager();
 
 #warning Need to add IP Address of machine.
@@ -47,15 +46,6 @@ namespace GrpcPokemon
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine(ex.Message);
       }
-    }
-
-    /// <summary>
-    /// Set the size of the console. 
-    /// </summary>
-    private static void SetConsoleSize()
-    {
-      Console.SetWindowSize(80, 50);
-      Console.SetBufferSize(100, 100);
     }
 
     internal static WebApplicationBuilder CreateServer(IPAddress address, int port)

@@ -6,7 +6,7 @@
   /// </summary>
   public static class Start
   {
-    private static string _version = "gRPC Pokemon v1.0.0";
+    private static string _version = "Consolemon v1.0.0";
 
     /// <summary>
     /// Display the start menu.
