@@ -52,7 +52,8 @@ namespace GrpcPokemon.Menus.Display
 ╰{new String('─', Console.BufferWidth - 2)}╯
 (?) Press a key to choose!
       ");
-            DrawPokemon(2, 5 + (P1.Length > P2.Length ? P1.Length - P2.Length : P2.Length - P1.Length), P1);
+            int temp = new Random().Next(1, 3);
+            DrawPokemon(2 + temp, 5 + (P1.Length > P2.Length ? P1.Length - P2.Length : P2.Length - P1.Length), P1);
             DrawPokemon(Console.BufferWidth - 3 - P1[1].Length, 0, P2);
 
             ConsoleKeyInfo pressedKey = Console.ReadKey(true);
